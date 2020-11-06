@@ -4,8 +4,6 @@
 #include <stdlib.h>
 #include <ctime>
 
-using namespace std;
-
 void PlayGame();
 bool WantToPlayAgain();
 bool IsGameOver(int secretNumber, int numberOfTries, int guess);
@@ -89,7 +87,7 @@ void PlayGame()
     int numberOfTries = ceil(log2(UPPER_BOUND));
     int guess = 0;
 
-    cout << "The range of the number is between 0 and 100" << endl;
+    std::cout << "The range of the number is between 0 and 100" << std::endl;
 
     do
     {
@@ -100,9 +98,9 @@ void PlayGame()
             numberOfTries--;
 
             if (guess > secretNumber)
-                cout << "Your guess was too high!" << endl;
+                std::cout << "Your guess was too high!" << std::endl;
             else
-                cout << "Your guess was too low!" << endl;
+                std::cout << "Your guess was too low!" << std::endl;
         }
     } while (!IsGameOver(secretNumber, numberOfTries, guess));
 
@@ -118,19 +116,19 @@ bool WantToPlayAgain()
     {
         failure = false;
 
-        cout << "Would you like to play again? (y/n) ";
-        cin >> input;
+        std::cout << "Would you like to play again? (y/n) ";
+        std::cin >> input;
 
-        if (cin.fail())
+        if (std::cin.fail())
         {
-            cin.clear();
-            cin.ignore(IGNORE_CHARS, '\n');
-            cout << "Input error! Please try again." << endl;
+            std::cin.clear();
+            std::cin.ignore(IGNORE_CHARS, '\n');
+            std::cout << "Input error! Please try again." << std::endl;
             failure = true;
         }
         else
         {
-            cin.ignore(IGNORE_CHARS, '\n');
+            std::cin.ignore(IGNORE_CHARS, '\n');
 
             input = tolower(input);
         }
@@ -154,14 +152,14 @@ int GetGuess(int numberOfTries)
     {
         failure = false;
 
-        cout << "Please enter your gues (number of guesses left: " << numberOfTries << "): ";
-        cin >> guess;
+        std::cout << "Please enter your gues (number of guesses left: " << numberOfTries << "): ";
+        std::cin >> guess;
 
-        if (cin.fail())
+        if (std::cin.fail())
         {
-            cin.clear();
-            cin.ignore(IGNORE_CHARS, '\n');
-            cout << "Input error! Please try again." << endl;
+            std::cin.clear();
+            std::cin.ignore(IGNORE_CHARS, '\n');
+            std::cout << "Input error! Please try again." << std::endl;
             failure = true;
         }
 
@@ -173,7 +171,7 @@ int GetGuess(int numberOfTries)
 void DisplayResult(int secretNumber, int numberOfTries)
 {
     if (numberOfTries > 0)
-        cout << "You got it! It was: " << secretNumber << endl;
+        std::cout << "You got it! It was: " << secretNumber << std::endl;
     else
-        cout << "You didn't get it.... It was: " << secretNumber << endl;
+        std::cout << "You didn't get it.... It was: " << secretNumber << std::endl;
 }
