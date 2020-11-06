@@ -1,5 +1,6 @@
 #include <iostream>
 #include <cmath>
+#include <cctype>
 
 using namespace std;
 
@@ -123,6 +124,13 @@ bool WantToPlayAgain()
             cout << "Input error! Please try again." << endl;
             failure = true;
         }
+        else
+        {
+            cin.ignore(IGNORE_CHARS, '\n');
+
+            input = tolower(input);
+        }
+
     } while (failure);
 
     return input == 'y';
