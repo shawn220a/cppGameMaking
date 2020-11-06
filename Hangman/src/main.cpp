@@ -4,8 +4,6 @@
 
 #include "Utils.hpp"
 
-using namespace std;
-
 void PlayGame();
 bool WantToPlayAgain();
 int GetSecretPhrase(char secretPhrase[], int maxLength);
@@ -79,14 +77,14 @@ int GetSecretPhrase(char secretPhrase[], int maxLength)
     {
         failure = false;
 
-        cout << "Please enter the secret phrase: ";
-        cin.get(secretPhrase, maxLength);
+        std::cout << "Please enter the secret phrase: ";
+        std::cin.get(secretPhrase, maxLength);
 
-        if (cin.fail())
+        if (std::cin.fail())
         {
-            cin.clear();
-            cin.ignore(IGNORE_CHARS, '\n');
-            cout << INPUT_ERROR_STRING << endl;
+            std::cin.clear();
+            std::cin.ignore(IGNORE_CHARS, '\n');
+            std::cout << INPUT_ERROR_STRING << std::endl;
             failure = true;
         }
         else
@@ -95,7 +93,7 @@ int GetSecretPhrase(char secretPhrase[], int maxLength)
 
             if (length == 0)
             {
-                cout << "You must enter a word that's longer than 0 characters! Please try again." << endl;
+                std::cout << "You must enter a word that's longer than 0 characters! Please try again." << std::endl;
 
                 failure = true;
             }
@@ -125,77 +123,79 @@ char *MakeHiddenPhrase(const char *secretPhrase, int secretPhraseLength)
 
 void DrawBoard(int numberOfGuessesLeft, const char *noptrHiddenPhrase)
 {
+    ClearScreen();
+
     switch (numberOfGuessesLeft)
     {
     case 0:
-        cout << " +---+" << endl;
-        cout << " |   |" << endl;
-        cout << " |   O" << endl;
-        cout << " |  /|\\" << endl;
-        cout << " |  / \\" << endl;
-        cout << "-+-" << endl
-             << endl;
+        std::cout << " +---+" << std::endl;
+        std::cout << " |   |" << std::endl;
+        std::cout << " |   O" << std::endl;
+        std::cout << " |  /|\\" << std::endl;
+        std::cout << " |  / \\" << std::endl;
+        std::cout << "-+-" << std::endl
+                  << std::endl;
         break;
     case 1:
-        cout << " +---+" << endl;
-        cout << " |   |" << endl;
-        cout << " |   O" << endl;
-        cout << " |  /|\\" << endl;
-        cout << " |  /" << endl;
-        cout << "-+-" << endl
-             << endl;
+        std::cout << " +---+" << std::endl;
+        std::cout << " |   |" << std::endl;
+        std::cout << " |   O" << std::endl;
+        std::cout << " |  /|\\" << std::endl;
+        std::cout << " |  /" << std::endl;
+        std::cout << "-+-" << std::endl
+                  << std::endl;
         break;
     case 2:
-        cout << " +---+" << endl;
-        cout << " |   |" << endl;
-        cout << " |   O" << endl;
-        cout << " |  /|\\" << endl;
-        cout << " |" << endl;
-        cout << "-+-" << endl
-             << endl;
+        std::cout << " +---+" << std::endl;
+        std::cout << " |   |" << std::endl;
+        std::cout << " |   O" << std::endl;
+        std::cout << " |  /|\\" << std::endl;
+        std::cout << " |" << std::endl;
+        std::cout << "-+-" << std::endl
+                  << std::endl;
         break;
     case 3:
-        cout << " +---+" << endl;
-        cout << " |   |" << endl;
-        cout << " |   O" << endl;
-        cout << " |  /|" << endl;
-        cout << " |" << endl;
-        cout << "-+-" << endl
-             << endl;
+        std::cout << " +---+" << std::endl;
+        std::cout << " |   |" << std::endl;
+        std::cout << " |   O" << std::endl;
+        std::cout << " |  /|" << std::endl;
+        std::cout << " |" << std::endl;
+        std::cout << "-+-" << std::endl
+                  << std::endl;
         break;
     case 4:
-        cout << " +---+" << endl;
-        cout << " |   |" << endl;
-        cout << " |   O" << endl;
-        cout << " |   |" << endl;
-        cout << " |" << endl;
-        cout << "-+-" << endl
-             << endl;
+        std::cout << " +---+" << std::endl;
+        std::cout << " |   |" << std::endl;
+        std::cout << " |   O" << std::endl;
+        std::cout << " |   |" << std::endl;
+        std::cout << " |" << std::endl;
+        std::cout << "-+-" << std::endl
+                  << std::endl;
         break;
     case 5:
-        cout << " +---+" << endl;
-        cout << " |   |" << endl;
-        cout << " |   O" << endl;
-        cout << " |" << endl;
-        cout << " |" << endl;
-        cout << "-+-" << endl
-             << endl;
+        std::cout << " +---+" << std::endl;
+        std::cout << " |   |" << std::endl;
+        std::cout << " |   O" << std::endl;
+        std::cout << " |" << std::endl;
+        std::cout << " |" << std::endl;
+        std::cout << "-+-" << std::endl
+                  << std::endl;
         break;
     case 6:
-        cout << " +---+" << endl;
-        cout << " |   |" << endl;
-        cout << " |" << endl;
-        cout << " |" << endl;
-        cout << " |" << endl;
-        cout << "-+-" << endl
-             << endl;
+        std::cout << " +---+" << std::endl;
+        std::cout << " |   |" << std::endl;
+        std::cout << " |" << std::endl;
+        std::cout << " |" << std::endl;
+        std::cout << " |" << std::endl;
+        std::cout << "-+-" << std::endl
+                  << std::endl;
         break;
     default:
         break;
     }
 
-    cout << "Secret Phrase: " << noptrHiddenPhrase << endl
-         << endl;
+    std::cout << "Secret Phrase: " << noptrHiddenPhrase << std::endl
+              << std::endl;
 }
 
 char GetGuess()
@@ -241,7 +241,7 @@ bool IsGameOver(int numberOfGuessesLeft, const char *noptrHiddenPhrase, int secr
 void DisplayResult(const char *secretPhrase, int numberOfGuessesLeft)
 {
     if (numberOfGuessesLeft > 0)
-        cout << "You got it! The phrase was: " << secretPhrase << endl;
+        std::cout << "You got it! The phrase was: " << secretPhrase << std::endl;
     else
-        cout << "You didn't get it.... The phrase was: " << secretPhrase << endl;
+        std::cout << "You didn't get it.... The phrase was: " << secretPhrase << std::endl;
 }

@@ -16,25 +16,25 @@ char GetCharacter(const char *prompt, const char *error)
   {
     failure = false;
 
-    cout << prompt;
-    cin >> input;
+    std::cout << prompt;
+    std::cin >> input;
 
-    if (cin.fail())
+    if (std::cin.fail())
     {
-      cin.clear();
-      cin.ignore(IGNORE_CHARS, '\n');
-      cout << error << endl;
+      std::cin.clear();
+      std::cin.ignore(IGNORE_CHARS, '\n');
+      std::cout << error << std::endl;
       failure = true;
     }
     else
     {
-      cin.ignore(IGNORE_CHARS, '\n');
+      std::cin.ignore(IGNORE_CHARS, '\n');
 
       if (isalpha(input))
         input = tolower(input);
       else
       {
-        cout << error << endl;
+        std::cout << error << std::endl;
 
         failure = true;
       }
@@ -54,19 +54,19 @@ char GetCharacter(const char *prompt, const char *error, const char validInput[]
   {
     failure = false;
 
-    cout << prompt;
-    cin >> input;
+    std::cout << prompt;
+    std::cin >> input;
 
-    if (cin.fail())
+    if (std::cin.fail())
     {
-      cin.clear();
-      cin.ignore(IGNORE_CHARS, '\n');
-      cout << error << endl;
+      std::cin.clear();
+      std::cin.ignore(IGNORE_CHARS, '\n');
+      std::cout << error << std::endl;
       failure = true;
     }
     else
     {
-      cin.ignore(IGNORE_CHARS, '\n');
+      std::cin.ignore(IGNORE_CHARS, '\n');
 
       if (isalpha(input))
       {
@@ -78,11 +78,17 @@ char GetCharacter(const char *prompt, const char *error, const char validInput[]
             return input;
         }
       }
-      cout << error << endl;
+      std::cout << error << std::endl;
 
       failure = true;
     }
   } while (failure);
 
   return input;
+}
+
+void ClearScreen()
+{
+  // system("cls");  Windows only
+  system("clear");
 }
