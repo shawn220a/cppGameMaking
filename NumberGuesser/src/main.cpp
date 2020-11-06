@@ -7,6 +7,9 @@ void PlayGame();
 bool WantToPlayAgain();
 bool IsGameOver(int secretNumber, int numberOfTries, int guess);
 int GetGuess(int numberOfTries);
+void DisplayResult(int secretNumber, int numberOfTries);
+
+const int IGNORE_CHARS = 256;
 
 int main()
 {
@@ -81,16 +84,48 @@ void PlayGame()
     int numberOfTries = ceil(log2(UPPER_BOUND));
     int guess = 0;
 
+    cout << "The range of the number is between 0 and 100" << endl;
+
     do
     {
         guess = GetGuess(numberOfTries);
+
+        if (guess != secretNumber)
+        {
+            numberOfTries--;
+
+            if (guess > secretNumber)
+                cout << "Your guess was too high!" << endl;
+            else
+                cout << "Your guess was too low!" << endl;
+        }
     } while (!IsGameOver(secretNumber, numberOfTries, guess));
+
+    DisplayResult(secretNumber, numberOfTries);
 }
 
 bool WantToPlayAgain()
 {
-    // TODO: implement
-    return false;
+    char input;
+    bool failure;
+
+    do
+    {
+        failure = false;
+
+        cout << "Would you like to play again? (y/n) ";
+        cin >> input;
+
+        if (cin.fail())
+        {
+            cin.clear();
+            cin.ignore(IGNORE_CHARS, '\n');
+            cout << "Input error! Please try again." << endl;
+            failure = true;
+        }
+    } while (failure);
+
+    return input == 'y';
 }
 
 bool IsGameOver(int secretNumber, int numberOfTries, int guess)
@@ -100,7 +135,6 @@ bool IsGameOver(int secretNumber, int numberOfTries, int guess)
 
 int GetGuess(int numberOfTries)
 {
-    const int IGNORE_CHARS = 256;
     int guess;
     bool failure;
 
@@ -122,4 +156,12 @@ int GetGuess(int numberOfTries)
     } while (failure);
 
     return guess;
+}
+
+void DisplayResult(int secretNumber, int numberOfTries)
+{
+    if (numberOfTries > 0)
+        cout << "You got it! It was: " << secretNumber << endl;
+    else
+        cout << "You didn't get it.... It was: " << secretNumber << endl;
 }
