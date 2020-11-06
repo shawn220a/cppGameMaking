@@ -3,8 +3,6 @@
 
 #include "Utils.hpp"
 
-using namespace std;
-
 const int IGNORE_CHARS = 256;
 
 char GetCharacter(const char *prompt, const char *error)
@@ -91,4 +89,10 @@ void ClearScreen()
 {
   // system("cls");  Windows only
   system("clear");
+}
+
+void WaitForKeyPress()
+{
+  // system("pause"); Windows only
+  system("read -n 1 -s -p \"Press any key to continue...\";echo");
 }
