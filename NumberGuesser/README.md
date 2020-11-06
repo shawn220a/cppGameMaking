@@ -16,5 +16,5 @@
 - [x] Any wrong guess will decrement the number of guesses left.
 - [x] The game ends by saying what the secret number was regardless of if the player guessed the right number.
 - [x] When the game is over, the player should be prompted if he would like to play again.
-- [ ] If yes then the secret number should change.
+- [x] If yes then the secret number should change.
 - [x] Any input errors by the player should have proper handling.
