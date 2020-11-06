@@ -2,6 +2,8 @@
 #include <cstring>
 #include <cctype>
 
+#include "Utils.hpp"
+
 using namespace std;
 
 void PlayGame();
@@ -14,8 +16,6 @@ void UpdateBoard(char guess, char *noptrHiddenPhrase, const char secretPhrase[],
                  int &numberOfGuessesLeft);
 bool IsGameOver(int numberOfGuessesLeft, const char *noptrHiddenPhrase, int secretPhraseLength);
 void DisplayResult(const char *secretPhrase, int numberOfGuessesLeft);
-char GetCharacter(const char *prompt, const char *error);
-char GetCharacter(const char *prompt, const char *error, const char validInput[], int validInputLength);
 
 const int IGNORE_CHARS = 256;
 const char *INPUT_ERROR_STRING = "Input error! Please try again.";
@@ -244,84 +244,4 @@ void DisplayResult(const char *secretPhrase, int numberOfGuessesLeft)
         cout << "You got it! The phrase was: " << secretPhrase << endl;
     else
         cout << "You didn't get it.... The phrase was: " << secretPhrase << endl;
-}
-
-char GetCharacter(const char *prompt, const char *error)
-{
-    char input;
-    bool failure;
-
-    do
-    {
-        failure = false;
-
-        cout << prompt;
-        cin >> input;
-
-        if (cin.fail())
-        {
-            cin.clear();
-            cin.ignore(IGNORE_CHARS, '\n');
-            cout << INPUT_ERROR_STRING << endl;
-            failure = true;
-        }
-        else
-        {
-            cin.ignore(IGNORE_CHARS, '\n');
-
-            if (isalpha(input))
-                input = tolower(input);
-            else
-            {
-                cout << error << endl;
-
-                failure = true;
-            }
-        }
-
-    } while (failure);
-
-    return input;
-}
-
-char GetCharacter(const char *prompt, const char *error, const char validInput[], int validInputLength)
-{
-    char input;
-    bool failure;
-
-    do
-    {
-        failure = false;
-
-        cout << prompt;
-        cin >> input;
-
-        if (cin.fail())
-        {
-            cin.clear();
-            cin.ignore(IGNORE_CHARS, '\n');
-            cout << INPUT_ERROR_STRING << endl;
-            failure = true;
-        }
-        else
-        {
-            cin.ignore(IGNORE_CHARS, '\n');
-
-            if (isalpha(input))
-            {
-                input = tolower(input);
-
-                for (int i = 0; i < validInputLength; i++)
-                {
-                    if (input == validInput[i])
-                        return input;
-                }
-            }
-            cout << error << endl;
-
-            failure = true;
-        }
-    } while (failure);
-
-    return input;
 }
