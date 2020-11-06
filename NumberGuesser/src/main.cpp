@@ -1,6 +1,8 @@
 #include <iostream>
 #include <cmath>
 #include <cctype>
+#include <stdlib.h>
+#include <ctime>
 
 using namespace std;
 
@@ -69,6 +71,8 @@ int main()
 
     */
 
+    srand((unsigned int)time(NULL));
+
     do
     {
         PlayGame();
@@ -81,7 +85,7 @@ void PlayGame()
 {
     const int UPPER_BOUND = 100;
 
-    int secretNumber = 65;
+    int secretNumber = rand() % UPPER_BOUND;
     int numberOfTries = ceil(log2(UPPER_BOUND));
     int guess = 0;
 
