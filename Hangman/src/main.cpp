@@ -44,33 +44,11 @@ void PlayGame()
 
 bool WantToPlayAgain()
 {
-    char input;
-    bool failure;
+    const char validInputs[] = {'y', 'n'};
 
-    do
-    {
-        failure = false;
-
-        cout << "Would you like to play again? (y/n) ";
-        cin >> input;
-
-        if (cin.fail())
-        {
-            cin.clear();
-            cin.ignore(IGNORE_CHARS, '\n');
-            cout << INPUT_ERROR_STRING << endl;
-            failure = true;
-        }
-        else
-        {
-            cin.ignore(IGNORE_CHARS, '\n');
-
-            input = tolower(input);
-        }
-
-    } while (failure);
-
-    return input == 'y';
+    char response = GetCharacter("Would you like to play again? ", INPUT_ERROR_STRING, validInputs, 2);
+    
+    return response == 'y';
 }
 
 int GetSecretPhrase(char secretPhrase[], int maxLength)
