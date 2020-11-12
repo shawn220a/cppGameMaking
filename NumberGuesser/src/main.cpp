@@ -43,7 +43,7 @@ int main()
                     5a2. Check to see if the guess was higher or lower than the secret number
                         5a2a. If it was higher - print that the guess was too high
                         5a2b. If the guess was lower - then print that the guess was too low
-            
+
         } while (the game is not over)
 
         Display the result - tell the player if he got it or not
