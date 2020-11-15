@@ -1,6 +1,8 @@
 #ifndef BOARDS_HPP
 #define BOARDS_HPP
 
+#include "../Parts.hpp"
+
 void SetupBoards(Player& player);
 void ClearBoards(Player& player);
 void DrawBoards(const Player& player);

@@ -1,7 +1,6 @@
 #include <iostream>
 
 #include "Boards.hpp"
-#include "../Players/Players.hpp"
 
 void SetupBoards(Player& player)
 {
