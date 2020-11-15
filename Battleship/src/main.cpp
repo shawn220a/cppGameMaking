@@ -9,7 +9,6 @@ using namespace std;
 
 const char* INPUT_ERROR_STRING = "Input error! Please try again.";
 
-void InitializeShip(Ship& ship, int shipSize, ShipType shipType);
 void PlayGame(Player& player1, Player& player2);
 bool WantToPlayAgain();
 
@@ -27,15 +26,6 @@ int main()
   } while (WantToPlayAgain());
 
   return 0;
-}
-
-void InitializeShip(Ship& ship, int shipSize, ShipType shipType)
-{
-  ship.shipType = shipType;
-  ship.shipSize = shipSize;
-  ship.position.row = 0;
-  ship.position.col = 0;
-  ship.orientation = SO_HORIZONTAL;
 }
 
 void PlayGame(Player& player1, Player& player2)

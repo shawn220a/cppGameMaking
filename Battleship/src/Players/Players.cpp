@@ -1,6 +1,7 @@
 #include <iostream>
 
 #include "Players.hpp"
+#include "../Ships/Ships.hpp"
 
 void InitializePlayer(Player& player, const char* playerName)
 {
