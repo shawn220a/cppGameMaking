@@ -5,7 +5,7 @@
 
 const int IGNORE_CHARS = 256;
 
-char GetCharacter(const char *prompt, const char *error)
+char GetCharacter(const char* prompt, const char* error)
 {
   char input;
   bool failure;
@@ -43,7 +43,7 @@ char GetCharacter(const char *prompt, const char *error)
   return input;
 }
 
-char GetCharacter(const char *prompt, const char *error, const char validInput[], int validInputLength)
+char GetCharacter(const char* prompt, const char* error, const char validInput[], int validInputLength, CharacterCaseType charCase)
 {
   char input;
   bool failure;
@@ -68,7 +68,14 @@ char GetCharacter(const char *prompt, const char *error, const char validInput[]
 
       if (isalpha(input))
       {
-        input = tolower(input);
+        if (charCase == CC_UPPER_CASE)
+        {
+          input = toupper(input);
+        }
+        else if (charCase == CC_LOWER_CASE)
+        {
+          input = tolower(input);
+        }
 
         for (int i = 0; i < validInputLength; i++)
         {
