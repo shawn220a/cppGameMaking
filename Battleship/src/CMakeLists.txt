@@ -1,10 +1,10 @@
 set(Sources
   main.cpp
-  Utils.hpp
+  Utils/Utils.cpp
 )
 
 set(Headers
-  Utils.hpp
+  Utils/Utils.hpp
 )
 
 add_library(mainTests STATIC ${Sources} ${Headers})
