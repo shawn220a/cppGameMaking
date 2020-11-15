@@ -27,3 +27,17 @@
 
   ./Hangman
 ```
+
+## Game 3: Battleship
+
+### How to Run
+
+```sh
+  cd Battleship
+
+  make
+
+  cd bin
+
+  ./Battleship
+```
