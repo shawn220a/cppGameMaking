@@ -7,6 +7,7 @@ set(Sources
 )
 
 set(Headers
+  Parts.hpp
   Utils/Utils.hpp
   Boards/Boards.hpp
   Players/Players.hpp
