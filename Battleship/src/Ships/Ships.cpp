@@ -1,6 +1,5 @@
 #include <iostream>
 
-#include "../Players/Players.hpp"
 #include "Ships.hpp"
 
 void InitializeShip(Ship& ship, int shipSize, ShipType shipType)
