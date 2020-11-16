@@ -58,8 +58,15 @@ struct ShipPartType
   bool isHit;
 };
 
+enum PlayerType
+{
+  PT_HUMAN = 0,
+  PT_AI
+};
+
 struct Player
 {
+  PlayerType playerType;
   char playerName[PLAYER_NAME_SIZE];
   Ship ships[NUM_SHIPS];
   GuessType guessBoard[BOARD_SIZE][BOARD_SIZE];
