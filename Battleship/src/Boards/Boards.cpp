@@ -30,7 +30,12 @@ void SetupBoards(Player& player)
       isValidPlacement = IsValidPlacement(player, currentShip, shipPosition, orientation);
 
       if (!isValidPlacement)
+      {
         std::cout << "That was not a valid placement. Please try again." << std::endl;
+
+        WaitForKeyPress();
+      }
+
 
     } while (!isValidPlacement);
 
@@ -39,6 +44,8 @@ void SetupBoards(Player& player)
   }
 
   DrawBoards(player);
+
+  WaitForKeyPress();
 }
 
 void ClearBoards(Player& player)
@@ -102,6 +109,8 @@ void DrawGuessBoardRow(const Player& player, int row)
 
 void DrawBoards(const Player& player)
 {
+  ClearScreen();
+
   DrawColumnsRow();
 
   DrawColumnsRow();
@@ -174,4 +183,20 @@ void PlaceShipOnBoard(Player& player, Ship& currentShip, const ShipPositionType&
       player.shipBoard[row][shipPosition.col].shipType = currentShip.shipType;
       player.shipBoard[row][shipPosition.col].isHit = false;
     }
+}
+
+ShipType UpdateBoards(ShipPositionType guess, Player& currentPlayer, Player& otherPlayer)
+{
+  if (otherPlayer.shipBoard[guess.row][guess.col].shipType != ST_NONE)
+  {
+    currentPlayer.guessBoard[guess.row][guess.col] = GT_HIT;
+    otherPlayer.shipBoard[guess.row][guess.col].isHit = true;
+  }
+  else
+  {
+    currentPlayer.guessBoard[guess.row][guess.col] = GT_MISSED;
+  }
+
+  return otherPlayer.shipBoard[guess.row][guess.col].shipType;
+
 }
