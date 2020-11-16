@@ -1,6 +1,8 @@
 #include <iostream>
 
 #include "Boards.hpp"
+#include "../Players/Players.hpp"
+#include "../Ships/Ships.hpp"
 
 void SetupBoards(Player& player)
 {
@@ -52,7 +54,7 @@ void DrawShipBoardRow(const Player& player, int row)
 
   for (int col = 0; col < BOARD_SIZE; col++)
   {
-    std::cout << " " << " " << " |";
+    std::cout << " " << GetShipRepresentation(player, row, col) << " |";
   }
 }
 
@@ -64,7 +66,7 @@ void DrawGuessBoardRow(const Player& player, int row)
 
   for (int col = 0; col < BOARD_SIZE; col++)
   {
-    std::cout << " " << " " << " |";
+    std::cout << " " << GetGuessRepresentationAt(player, row, col) << " |";
   }
 }
 
