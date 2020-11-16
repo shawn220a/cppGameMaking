@@ -4,5 +4,6 @@
 #include "../Parts.hpp"
 
 void InitializePlayer(Player& player, const char* playerName);
+char GetGuessRepresentationAt(const Player& player, int row, int col);
 
 #endif // PLAYERS_HPP

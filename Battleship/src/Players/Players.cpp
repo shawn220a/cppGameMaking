@@ -14,3 +14,15 @@ void InitializePlayer(Player& player, const char* playerName)
   InitializeShip(player.ships[3], DESTROYER_SIZE, ST_DESTROYER);
   InitializeShip(player.ships[4], SUBMARINE_SIZE, ST_SUBMARINE);
 }
+
+char GetGuessRepresentationAt(const Player& player, int row, int col)
+{
+  if (player.guessBoard[row][col] == GT_HIT)
+    return '*';
+
+  else if (player.guessBoard[row][col] == GT_MISSED)
+    return 'o';
+
+  else
+    return ' ';
+}
