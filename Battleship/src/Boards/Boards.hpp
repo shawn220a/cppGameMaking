@@ -4,6 +4,7 @@
 #include "../Parts.hpp"
 
 void SetupBoards(Player& player);
+void SetupAIBoards(Player& player);
 void ClearBoards(Player& player);
 void DrawBoards(const Player& player);
 void DrawSeparatorLine();

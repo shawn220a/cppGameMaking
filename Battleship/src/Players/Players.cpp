@@ -2,6 +2,7 @@
 
 #include "Players.hpp"
 #include "../Ships/Ships.hpp"
+#include "../Utils/Utils.hpp"
 
 void InitializePlayer(Player& player, const char* playerName)
 {
@@ -25,4 +26,18 @@ char GetGuessRepresentationAt(const Player& player, int row, int col)
 
   else
     return ' ';
+}
+
+PlayerType GetPlayer2Type()
+{
+  const char* INPUT_ERROR_STRING = "Input error! Please try again.";
+
+  const int validInputs[2] = { 1, 2 };
+
+  int input = GetInteger("Who would you like to play against?\n1. Human\m@. AI\n\n What is your choice? ", INPUT_ERROR_STRING, validInputs, 2);
+
+  if (input == 1)
+    return PT_HUMAN;
+  else
+    return PT_AI;
 }

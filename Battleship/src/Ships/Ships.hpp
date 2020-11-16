@@ -9,5 +9,6 @@ const char* GetShipNameForShipType(ShipType shipType);
 ShipPositionType GetBoardPosition();
 ShipPositionType MapBoardPosition(char rowInput, int colInput);
 ShipOrientationType GetShipOrientation();
+ShipPositionType GetRandomPosition();
 
 #endif // SHIPS_HPP

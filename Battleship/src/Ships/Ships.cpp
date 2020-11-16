@@ -97,5 +97,14 @@ ShipOrientationType GetShipOrientation()
     return SO_HORIZONTAL;
   else
     return SO_VERTICAL;
+}
 
+ShipPositionType GetRandomPosition()
+{
+  ShipPositionType guess;
+
+  guess.row = rand() % BOARD_SIZE;
+  guess.col = rand() % BOARD_SIZE;
+
+  return guess;
 }

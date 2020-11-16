@@ -1,5 +1,7 @@
 #include <iostream>
 #include <cstring>
+#include <cstdlib>
+#include <ctime>
 
 #include "Utils/Utils.hpp"
 #include "Boards/Boards.hpp"
@@ -13,9 +15,13 @@ bool AreAllShipsSunk(const Player& player);
 bool IsSunk(const Player& player, const Ship& ship);
 void SwitchPlayers(Player** currentPlayer, Player** otherPlayer);
 void DisplayWinner(const Player& player1, const Player& player2);
+PlayerType GetPlayer2Type();
+ShipPositionType GetAIGuess(const Player& aiPlayer);
 
 int main()
 {
+  srand(time(NULL));
+
   Player player1;
   Player player2;
 
@@ -32,6 +38,12 @@ int main()
 
 void PlayGame(Player& player1, Player& player2)
 {
+
+  ClearScreen();
+
+  player1.playerType = PT_HUMAN;
+  player2.playerType = GetPlayer2Type();
+
   SetupBoards(player1);
   SetupBoards(player2);
 
@@ -42,29 +54,51 @@ void PlayGame(Player& player1, Player& player2)
 
   do
   {
-    DrawBoards(*currentPlayer);
+    if (currentPlayer->playerType == PT_HUMAN)
+    {
+      DrawBoards(*currentPlayer);
+    }
 
     bool isValidGuess;
 
     do
     {
-      std::cout << currentPlayer->playerName << " what is your guess? " << std::endl;
+      if (currentPlayer->playerType == PT_HUMAN)
+      {
+        std::cout << currentPlayer->playerName << " what is your guess? " << std::endl;
 
-      guess = GetBoardPosition();
+        guess = GetBoardPosition();
+      }
+      else
+      {
+        guess = GetAIGuess(*currentPlayer);
+      }
 
       isValidGuess = currentPlayer->guessBoard[guess.row][guess.col] == GT_NONE;
 
-      if (!isValidGuess)
+      if (!isValidGuess && currentPlayer->playerType == PT_HUMAN)
         std::cout << "That was not a valid guess! Please try again." << std::endl;
 
     } while (!isValidGuess);
 
     ShipType type = UpdateBoards(guess, *currentPlayer, *otherPlayer);
 
-    DrawBoards(*currentPlayer);
+    if (currentPlayer->playerType == PT_AI)
+    {
+      DrawBoards(*otherPlayer);
+
+      std::cout << currentPlayer->playerName << " chose row " << char(guess.row + 'A') << " and column " << guess.col + 1 << std::endl;
+    }
+    else
+      DrawBoards(*currentPlayer);
 
     if (type != ST_NONE && IsSunk(*otherPlayer, otherPlayer->ships[type - 1]))
-      std::cout << "You sunk " << otherPlayer->playerName << "'s " << GetShipNameForShipType(type) << "!" << std::endl;
+    {
+      if (currentPlayer->playerType == PT_AI)
+        std::cout << currentPlayer->playerName << " sunk your " << GetShipNameForShipType(type) << "!" << std::endl;
+      else
+        std::cout << "You sunk " << otherPlayer->playerName << "'s " << GetShipNameForShipType(type) << "!" << std::endl;
+    }
 
     WaitForKeyPress();
 
@@ -139,4 +173,9 @@ void DisplayWinner(const Player& player1, const Player& player2)
     std::cout << "Congratulations " << player2.playerName << "! You won!" << std::endl;
   else
     std::cout << "Congratulations " << player1.playerName << "! You won!" << std::endl;
+}
+
+ShipPositionType GetAIGuess(const Player& aiPlayer)
+{
+  return GetRandomPosition();
 }

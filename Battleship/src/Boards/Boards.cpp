@@ -9,6 +9,12 @@ void SetupBoards(Player& player)
 {
   ClearBoards(player);
 
+  if (player.playerType == PT_AI)
+  {
+    SetupAIBoards(player);
+    return;
+  }
+
   for (int i = 0; i < NUM_SHIPS; i++)
   {
     DrawBoards(player);
@@ -46,6 +52,25 @@ void SetupBoards(Player& player)
   DrawBoards(player);
 
   WaitForKeyPress();
+}
+
+void SetupAIBoards(Player& player)
+{
+  ShipPositionType position;
+  ShipOrientationType orientation;
+
+  for (int i = 0; i < NUM_SHIPS; i++)
+  {
+    Ship& currentShip = player.ships[i];
+
+    do
+    {
+      position = GetRandomPosition();
+      orientation = ShipOrientationType(rand() % 2);
+    } while (!IsValidPlacement(player, currentShip, position, orientation));
+
+    PlaceShipOnBoard(player, currentShip, position, orientation);
+  }
 }
 
 void ClearBoards(Player& player)
