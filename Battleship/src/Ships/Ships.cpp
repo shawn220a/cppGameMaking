@@ -11,7 +11,7 @@ void InitializeShip(Ship& ship, int shipSize, ShipType shipType)
   ship.orientation = SO_HORIZONTAL;
 }
 
-char GetShipRepresentation(const Player& player, int row, int col)
+char GetShipRepresentationAt(const Player& player, int row, int col)
 {
   if (player.shipBoard[row][col].isHit)
     return '*'; // represents hit

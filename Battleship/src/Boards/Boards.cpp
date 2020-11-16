@@ -54,7 +54,7 @@ void DrawShipBoardRow(const Player& player, int row)
 
   for (int col = 0; col < BOARD_SIZE; col++)
   {
-    std::cout << " " << GetShipRepresentation(player, row, col) << " |";
+    std::cout << " " << GetShipRepresentationAt(player, row, col) << " |";
   }
 }
 
