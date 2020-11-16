@@ -5,10 +5,6 @@
 #include "Boards/Boards.hpp"
 #include "Players/Players.hpp"
 
-using namespace std;
-
-const char* INPUT_ERROR_STRING = "Input error! Please try again.";
-
 void PlayGame(Player& player1, Player& player2);
 bool WantToPlayAgain();
 
@@ -36,6 +32,8 @@ void PlayGame(Player& player1, Player& player2)
 
 bool WantToPlayAgain()
 {
+  const char* INPUT_ERROR_STRING = "Input error! Please try again.";
+
   char input;
 
   const char validInput[2] = { 'y', 'n' };

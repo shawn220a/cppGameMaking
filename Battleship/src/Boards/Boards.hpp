@@ -9,5 +9,7 @@ void DrawBoards(const Player& player);
 void DrawSeparatorLine();
 void DrawColumnsRow();
 void DrawShipBoardRow(const Player& player, int row);
+bool IsValidPlacement(const Player& player, const Ship& currentShip, const ShipPositionType& shipPosition, ShipOrientationType orientation);
+void PlaceShipOnBoard(Player& player, Ship& currentShip, const ShipPositionType& shipPosition, ShipOrientationType orientation);
 
 #endif // BOARDS_HPP

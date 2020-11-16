@@ -3,10 +3,40 @@
 #include "Boards.hpp"
 #include "../Players/Players.hpp"
 #include "../Ships/Ships.hpp"
+#include "../Utils/Utils.hpp"
 
 void SetupBoards(Player& player)
 {
   ClearBoards(player);
+
+  for (int i = 0; i < NUM_SHIPS; i++)
+  {
+    DrawBoards(player);
+
+    Ship& currentShip = player.ships[i];
+
+    ShipPositionType shipPosition;
+    ShipOrientationType orientation;
+
+    bool isValidPlacement = false;
+
+    do
+    {
+      std::cout << player.playerName << " please set the position and orientation for your " << GetShipNameForShipType(currentShip.shipType) << std::endl;
+
+      shipPosition = GetBoardPosition();
+      orientation = GetShipOrientation();
+
+      isValidPlacement = IsValidPlacement(player, currentShip, shipPosition, orientation);
+
+      if (!isValidPlacement)
+        std::cout << "That was not a valid placement. Please try again." << std::endl;
+
+    } while (!isValidPlacement);
+
+    PlaceShipOnBoard(player, currentShip, shipPosition, orientation);
+
+  }
 
   DrawBoards(player);
 }
@@ -105,4 +135,43 @@ void DrawBoards(const Player& player)
 
   std::cout << std::endl;
 
+}
+
+bool IsValidPlacement(const Player& player, const Ship& currentShip, const ShipPositionType& shipPosition, ShipOrientationType orientation)
+{
+  if (orientation == SO_HORIZONTAL)
+    for (int col = shipPosition.col; col < (shipPosition.col + currentShip.shipSize); col++)
+    {
+      if (player.shipBoard[shipPosition.row][col].shipType != ST_NONE || col >= BOARD_SIZE)
+        return false;
+    }
+
+  else
+    for (int row = shipPosition.row; row < (shipPosition.row + currentShip.shipSize); row++)
+    {
+      if (player.shipBoard[row][shipPosition.col].shipType != ST_NONE || row >= BOARD_SIZE)
+        return false;
+    }
+
+  return true;
+}
+
+void PlaceShipOnBoard(Player& player, Ship& currentShip, const ShipPositionType& shipPosition, ShipOrientationType orientation)
+{
+  currentShip.position = shipPosition;
+  currentShip.orientation = orientation;
+
+  if (orientation == SO_HORIZONTAL)
+    for (int col = shipPosition.col; col < (shipPosition.col + currentShip.shipSize); col++)
+    {
+      player.shipBoard[shipPosition.row][col].shipType = currentShip.shipType;
+      player.shipBoard[shipPosition.row][col].isHit = false;
+    }
+
+  else
+    for (int row = shipPosition.row; row < (shipPosition.row + currentShip.shipSize); row++)
+    {
+      player.shipBoard[row][shipPosition.col].shipType = currentShip.shipType;
+      player.shipBoard[row][shipPosition.col].isHit = false;
+    }
 }
